@@ -8,13 +8,12 @@
 
 import UIKit
 
-class LibraryTableViewController: UITableViewController, AddLibraryViewControllerDelegate {
+class LibraryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
     
         super.viewDidLoad()
         navigationItem.title = "Libraries"
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         entireLibrary()
 //        reportAllBooks()
@@ -122,13 +121,7 @@ class LibraryTableViewController: UITableViewController, AddLibraryViewControlle
         
         super.didReceiveMemoryWarning()
     }
-    
-    override func viewWillAppear(animated: Bool) {
         
-        super.viewWillAppear(true)
-        self.tableView.reloadData()
-    }
-    
     // #pragma mark - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
@@ -151,47 +144,13 @@ class LibraryTableViewController: UITableViewController, AddLibraryViewControlle
         return cell
     }
 
-    // Override to support editing the table view
-    override func tableView(tableView: UITableView?, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath?) {
-        
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            libraries.removeAtIndex(indexPath!.row)
-            tableView!.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        } else if (editingStyle == UITableViewCellEditingStyle.Insert) {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView!, moveRowAtIndexPath sourceIndexPath: NSIndexPath!, toIndexPath destinationIndexPath:NSIndexPath!) {
-        
-        var cellToMove = libraries[sourceIndexPath.row]
-        libraries.removeAtIndex(sourceIndexPath.row)
-        libraries.insert(cellToMove, atIndex: destinationIndexPath.row)
-    }
-
     // #pragma mark - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if segue.identifier == "ShelfSegue" {
-            
+            segue.identifier == "ShelfSegue"
             let shelfVC = segue.destinationViewController as ShelfTableViewController
             var indexPath = tableView.indexPathForSelectedRow()
             var library:Library = libraries[indexPath.row]
             shelfVC.shelves = library.shelves
-            shelfVC.library = library
-            
-        } else if segue.identifier == "AddLibrarySegue" {
-            
-            let addLibraryVC = segue.destinationViewController as AddLibraryViewController
-            addLibraryVC.addLibraryDelegate = self
-        }
-    }
-    
-    func addLibrary(addLibrary: Library) {
-        
-        libraries.append(addLibrary)
-        tableView.reloadData()
-        navigationController.popViewControllerAnimated(true)
     }
 }
