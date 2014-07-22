@@ -10,7 +10,7 @@ import UIKit
 
 class BookTableViewController: UITableViewController {
 
-    var books = Book[]()
+    var books = [Book]()
     
     override func viewDidLoad() {
         
@@ -40,7 +40,8 @@ class BookTableViewController: UITableViewController {
         let cell: UITableViewCell = tableView!.dequeueReusableCellWithIdentifier("BookCell", forIndexPath: indexPath) as UITableViewCell
         
         let cellBook = books[indexPath!.row]
-        cell.text = cellBook.bookTitle
+//        cell.text = cellBook.bookTitle
+        cell.textLabel.text = cellBook.bookTitle
 
         return cell
     }

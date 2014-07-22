@@ -10,7 +10,7 @@ import UIKit
 
 class ShelfTableViewController: UITableViewController {
 
-    var shelves = Shelf[]()
+    var shelves = [Shelf]()
 
     override func viewDidLoad() {
         
@@ -40,7 +40,8 @@ class ShelfTableViewController: UITableViewController {
         let cell: UITableViewCell = tableView!.dequeueReusableCellWithIdentifier("ShelfCell", forIndexPath: indexPath) as UITableViewCell
         
         let cellShelf = shelves[indexPath!.row]
-        cell.text = cellShelf.shelfName
+//        cell.text = cellShelf.shelfName
+        cell.textLabel.text = cellShelf.shelfName
         
         return cell
     }
